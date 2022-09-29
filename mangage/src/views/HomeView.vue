@@ -4,65 +4,86 @@
       <h3>系统登录</h3>
       <el-form ref="form" :model="LoginForm" label-width="40px">
         <el-form-item prop="username">
-          <el-input v-model="LoginForm.username" placeholder="请输入用户名"></el-input>
+          <el-input
+            v-model="LoginForm.username"
+            placeholder="请输入用户名"
+          ></el-input>
         </el-form-item>
         <el-form-item prop="password">
-          <el-input v-model="LoginForm.password" placeholder="请输入密码"></el-input>
+          <el-input
+            v-model="LoginForm.password"
+            placeholder="请输入密码"
+          ></el-input>
         </el-form-item>
         <el-form-item prop="code" class="flax">
-          <el-input v-model="LoginForm.code" placeholder="请输入验证码" class="code"></el-input>
-          <img :src="imgCodeUrl" alt="" class="img">
+          <el-input
+            v-model="LoginForm.code"
+            placeholder="请输入验证码"
+            class="code"
+          ></el-input>
+          <img :src="imgCodeUrl" alt="" class="img" @click="codeImg" />
         </el-form-item>
       </el-form>
       <div class="auto">
-        <el-button type="primary" class="login" @click="PostLogin">登录</el-button>
+        <el-button type="primary" class="login" @click="PostLogin"
+          >登录</el-button
+        >
         <el-button class="clear" @click="clear">重置</el-button>
       </div>
     </el-card>
   </div>
 </template>
 <script>
-import LoginApi from '../api/login'
+import LoginApi from "../api/login";
 export default {
   data() {
     return {
-      imgCodeUrl: "",
+      imgCodeUrl: "", //图片路径
       LoginForm: {
+        //表单数据
         username: "",
         password: "",
-        code: ""
-      }
+        code: "",
+      },
     };
   },
   created() {
     // this.PostLogin()
-    this.LoginImg()
+    this.LoginImg();
   },
   methods: {
+    //登录
     async PostLogin() {
       try {
-        const response = await LoginApi.LoginUser(this.LoginForm)
+        const response = await LoginApi.LoginUser(this.LoginForm);
+        if (response.data.code == 200) {
+          this.$message.success("登录成功");
+        } else if (response.data.code == 500) {
+          this.$message.error(response.data.msg);
+        }
+
         console.log(response);
       } catch (e) {
         console.log(e);
       }
     },
-
+    //验证码
     async LoginImg() {
-
-      const response = await LoginApi.LoginImg()
+      const response = await LoginApi.LoginImg();
       console.log(response);
-      this.imgCodeUrl = window.URL.createObjectURL(response.data)
+      this.imgCodeUrl = window.URL.createObjectURL(response.data);
       console.log(this.imgCodeUrl);
-
     },
-
+    //验证码切换
+    codeImg() {
+      this.LoginImg();
+    },
+    //重置
     clear() {
-      this.$refs['form'].resetFields()
+      this.$refs["form"].resetFields();
     },
   },
-
-}
+};
 </script>
 <style scoped lang="scss">
 .card-box {
@@ -106,7 +127,6 @@ export default {
         width: 150px;
       }
     }
-
   }
 }
 </style>
