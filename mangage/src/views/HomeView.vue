@@ -73,6 +73,7 @@ export default {
           if (response.data.code == 200) {
             this.$message.success("登录成功");
             localStorage.setItem("token", response.data.token);
+            this.$router.push("/user");
           } else if (response.data.code == 500) {
             this.$message.error(response.data.msg);
           }
