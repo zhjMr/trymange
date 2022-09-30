@@ -26,9 +26,9 @@
         </el-form-item>
       </el-form>
       <div class="auto">
-        <el-button type="primary" class="login" @click="PostLogin"
-          >登录</el-button
-        >
+        <el-button type="primary" class="login" @click="PostLogin">{{
+          LoginText
+        }}</el-button>
         <el-button class="clear" @click="clear">重置</el-button>
       </div>
     </el-card>
@@ -39,6 +39,7 @@ import LoginApi from "../api/login";
 export default {
   data() {
     return {
+      LoginText: "登录",
       imgCodeUrl: "", //图片路径
       LoginForm: {
         //表单数据
@@ -69,6 +70,7 @@ export default {
         });
       } else {
         try {
+          this.LoginText = "登录中...";
           const response = await LoginApi.LoginUser(this.LoginForm);
           if (response.data.code == 200) {
             this.$message.success("登录成功");
@@ -76,6 +78,7 @@ export default {
             this.$router.push("/user");
           } else if (response.data.code == 500) {
             this.$message.error(response.data.msg);
+            this.LoginText = "登录";
           }
           console.log(response);
         } catch (e) {
@@ -108,14 +111,11 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-
   .flax {
     display: flex;
-
     .code {
       width: 200px;
     }
-
     .img {
       vertical-align: middle;
       width: 100px;
@@ -123,22 +123,19 @@ export default {
       margin-left: 5px;
     }
   }
-
   .card {
-    width: 35%;
+    width: 480px;
 
     h3 {
       font-size: 24px;
       padding-bottom: 20px;
       text-align: center;
     }
-
     .auto {
       .login {
         width: 150px;
         margin-left: 50px;
       }
-
       .clear {
         width: 150px;
       }
