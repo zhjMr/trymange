@@ -1,7 +1,7 @@
 import axios from "axios";
 //基准地址 超时时间
 const service = axios.create({
-  baseURL: "http://119.45.133.128:8089/api",
+  baseURL: "http://119.45.133.128:8098/api",
   timeout: 5000,
 });
 //请求拦截
