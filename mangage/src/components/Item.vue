@@ -5,7 +5,7 @@
                 <i class="el-icon-location"></i>
                 <span>{{item.label}}</span>
             </template>
-            <AppItem v-for="(ele) in item.children" :key="ele.id" :item="ele"></AppItem>
+            <AppItem v-for="(ele,index) in item.children" :key="ele.id" :item="ele"></AppItem>
         </el-submenu>
         <el-menu-item :index="item.path" v-if="!item.children||item.children.length==0">
             <i class="el-icon-menu"></i>

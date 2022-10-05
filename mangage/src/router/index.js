@@ -8,7 +8,6 @@ const routes = [
   {
     path: "/",
     name: "home",
-    redirect: "/user",
     component: HomeView,
   },
   {
@@ -19,27 +18,42 @@ const routes = [
       {
         path: "/test3",
         name: "test3",
+        meta:{
+          title: "测试"
+        },
         component: () => import("../views/test3.vue"),
       },
       {
         path: "/department",
         name: "department",
         component: () => import("../views/department.vue"),
+        meta: {
+          title: "机构管理"
+        }
       },
       {
         path: "/userList",
         name: "userList",
-        component: () => import("../views/userList.vue"),
+        component: () => import("../views/userList"),
+        meta: {
+          title: "用户管理"
+        }
       },
       {
         path: "/roleList",
         name: "roleList",
         component: () => import("../views/roleList.vue"),
+        meta: {
+          title: "角色管理"
+        }
       },
       {
         path: "/menuList",
         name: "menuList",
         component: () => import("../views/menuList.vue"),
+        meta: {
+          title: "权限管理"
+        }
       },
       {
         path: "/goodCategory",

@@ -1,8 +1,8 @@
 <template>
     <div>
-        <el-menu default-active="2" class="el-menu-vertical-demo" background-color="#fff" text-color="#666"
+        <el-menu :default-active="$route.path" class="el-menu-vertical-demo" background-color="#fff" text-color="#666"
             active-text-color="#167bd8" unique-opened router :collapse="isCollapse">
-            <AppItem v-for="item in  MenuList" :key="item.id" :item="item"> </AppItem>
+            <AppItem v-for="(item,index) in  MenuList" :key="index" :item="item"> </AppItem>
         </el-menu>
     </div>
 </template>
@@ -24,6 +24,9 @@ export default {
         return {
 
         };
+    },
+    created() {
+        console.log(this.$route);
     },
     computed: {
         ...mapGetters([
