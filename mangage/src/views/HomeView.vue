@@ -4,30 +4,19 @@
       <h3>系统登录</h3>
       <el-form ref="form" :model="LoginForm" label-width="40px" :rules="rules">
         <el-form-item prop="username">
-          <el-input
-            v-model.trim="LoginForm.username"
-            placeholder="请输入用户名"
-          ></el-input>
+          <el-input v-model.trim="LoginForm.username" placeholder="请输入用户名"></el-input>
         </el-form-item>
         <el-form-item prop="password">
-          <el-input
-            show-password
-            v-model.trim="LoginForm.password"
-            placeholder="请输入密码"
-          ></el-input>
+          <el-input show-password v-model.trim="LoginForm.password" placeholder="请输入密码"></el-input>
         </el-form-item>
         <el-form-item prop="code" class="flax">
-          <el-input
-            v-model.trim="LoginForm.code"
-            placeholder="请输入验证码"
-            class="code"
-          ></el-input>
+          <el-input v-model.trim="LoginForm.code" placeholder="请输入验证码" class="code"></el-input>
           <img :src="imgCodeUrl" alt="" class="img" @click="codeImg" />
         </el-form-item>
       </el-form>
       <div class="auto">
         <el-button type="primary" class="login" @click="PostLogin">{{
-          LoginText
+        LoginText
         }}</el-button>
         <el-button class="clear" @click="clear">重置</el-button>
       </div>
@@ -62,30 +51,53 @@ export default {
   },
   methods: {
     //登录
-    async PostLogin() {
-      const { username, password, code } = this.LoginForm;
-      if (username == "" || password == "" || code == "") {
-        this.$refs["form"].validate((valid) => {
-          if (!valid) return;
-        });
+    PostLogin() {
+      // const { username, password, code } = this.LoginForm;
+      // if (username == "" || password == "" || code == "") {
+      this.$refs["form"].validate((valid) => {
+        if (!valid) return;
+        this.getLogin()
+      })
+    },
+    // 吊接口
+
+    async getLogin() {
+      this.LoginText = "登录中...";
+      let response = await this.$store.dispatch("user/getLogin", this.LoginForm)
+      console.log(response.data.code, 123);
+      if (response.data.code == 200) {
+        this.$message.success("登录成功")
+        this.$router.push("/user")
       } else {
-        try {
-          this.LoginText = "登录中...";
-          const response = await LoginApi.LoginUser(this.LoginForm);
-          if (response.data.code == 200) {
-            this.$message.success("登录成功");
-            localStorage.setItem("token", response.data.token);
-            this.$router.push("/user");
-          } else if (response.data.code == 500) {
-            this.$message.error(response.data.msg);
-            this.LoginText = "登录";
-          }
-          console.log(response);
-        } catch (e) {
-          console.log(e);
+        if (response.data.code == 500) {
+          this.$message.error(response.data.msg);
+          this.LoginText = "登录";
         }
       }
+
     },
+
+    // });
+    // } else {
+    // try {
+    //   this.LoginText = "登录中...";
+
+    //   const response = await LoginApi.LoginUser(this.LoginForm);
+    //   if (response.data.code == 200) {
+
+    //     this.$message.success("登录成功");
+    //     this.$store.commit('user/setToken', response.data.token)
+    //     this.$router.push("/user");
+    //   } else if (response.data.code == 500) {
+    //             this.$message.error(response.data.msg);
+    //              this.LoginText = "登录";
+    //   }
+    //   console.log(response);
+    // } catch (e) {
+    //   console.log(e);
+    // }
+    // }
+
     //验证码
     async LoginImg() {
       const response = await LoginApi.LoginImg();
@@ -111,18 +123,22 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+
   .flax {
     display: flex;
+
     .code {
       width: 200px;
     }
+
     .img {
       vertical-align: middle;
-      width: 100px;
-      height: 30px;
+      width: 160px;
+      height: 40px;
       margin-left: 5px;
     }
   }
+
   .card {
     width: 480px;
 
@@ -131,11 +147,13 @@ export default {
       padding-bottom: 20px;
       text-align: center;
     }
+
     .auto {
       .login {
         width: 150px;
         margin-left: 50px;
       }
+
       .clear {
         width: 150px;
       }

@@ -1,13 +1,14 @@
 import axios from "axios";
+import TokenKey from './auth'
 //基准地址 超时时间
 const service = axios.create({
-  baseURL: "http://119.45.133.128:8098/api",
+  baseURL: process.env.VUE_APP_BASE_API,
   timeout: 5000,
 });
 //请求拦截
 service.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("token");
+    const token = TokenKey.getTokne()
     if (token) config.headers.token = token;
     return config;
   },
@@ -24,5 +25,12 @@ service.interceptors.response.use(
     return Promise.reject(error);
   }
 );
-
-export default service;
+//data传参
+const request = (options) => {
+  options.method = options.method || 'GET'
+  if (options.method.toLowerCase() === 'get') {
+    options.params = options.data
+  }
+  return service(options)
+}
+export default request;

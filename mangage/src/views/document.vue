@@ -5,16 +5,16 @@
 </template>
 <script>
 export default {
-    data () {
+    data() {
         return {
-    
+
         };
     },
-    methods:{
-    
+    methods: {
+
     }
 }
 </script>
 <style scoped lang="scss">
-    
+
 </style>

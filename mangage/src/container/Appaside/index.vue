@@ -1,10 +1,10 @@
 <template>
   <div>
-     <Appmenu :MenuList="MenuList"></Appmenu>
+    <Appmenu :MenuList="MenuList"></Appmenu>
   </div>
 </template>
 <script>
-import menua from "../../api/menu";
+
 export default {
   name: "Appaside",
   components: {
@@ -12,22 +12,20 @@ export default {
   },
   data() {
     return {
-      MenuList: [],
+      // MenuList: [],
     };
   },
+  computed:{
+    MenuList(){
+      return this.$store.getters.menuList
+    }
+
+  },
   methods: {
-    async menuas() {
-      try {
-        let response = await menua.Menu();
-        console.log(response, "response ");
-        this.MenuList = response.data.data.menuList;
-      } catch (e) {
-        console.log(e);
-      }
-    },
+  
   },
   created() {
-    this.menuas();
+
   },
 };
 </script>

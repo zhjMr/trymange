@@ -1,9 +1,11 @@
 import request from "../utils/request";
+import qs from 'qs'
 //用户登录
 const LoginUser = (data) => {
   return request({
-    url: `/user/login?username=${data.username}&password=${data.password}&code=${data.code}`,
+    url: `/user/login`,
     method: "POST",
+    data: qs.stringify(data)
   });
 };
 //验证码
@@ -21,6 +23,7 @@ const LoginOut = () => {
     method: "POST",
   });
 };
+
 export default {
   LoginUser,
   LoginImg,

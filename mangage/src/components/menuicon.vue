@@ -13,7 +13,7 @@ export default {
         };
     },
     created() {
-        console.log(this.isCollapse);
+       
     },
     computed: {
         ...mapGetters(['isCollapse'])
