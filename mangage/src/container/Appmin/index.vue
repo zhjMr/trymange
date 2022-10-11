@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="box">
     <div class="tap">
       <menuicon></menuicon>
       <menuTag></menuTag>
@@ -18,11 +18,23 @@ export default {
   data() {
     return {};
   },
-  methods: {},
+  methods: {
+    
+  },
 };
 </script>
 <style scoped lang="scss">
 .tap {
   display: flex;
+
+}
+.box{
+  width: 100%;
+  height: 100%;
+  // background-color: blue;
+}
+.view{
+  height: 100%;
+  // background-color: pink;
 }
 </style>

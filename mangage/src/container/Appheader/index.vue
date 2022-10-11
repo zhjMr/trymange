@@ -21,6 +21,7 @@
 </template>
 <script>
 import moment from "moment";
+import TokenKey from '../../utils/auth'
 import Logout from "../../api/login";
 import "moment/locale/zh-cn";
 export default {
@@ -52,11 +53,8 @@ export default {
     async handleQuit() {
       const response = await Logout.LoginOut();
       console.log(response);
-      localStorage.removeItem('token')
-      setTimeout(() => {
-        this.$router.push("/");
-      }, 1000);
-      this.$message.success("退出登录成功");
+      TokenKey.removeTokne()
+      this.$router.go(0)
     },
     timer() {
       this.timer = setInterval(() => {
@@ -82,12 +80,15 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   h3 {
     font-weight: 400;
   }
+
   .div {
     align-items: center;
     display: flex;
+
     img {
       vertical-align: middle;
       border-radius: 50%;

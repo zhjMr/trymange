@@ -49,6 +49,7 @@ export default {
             immediate: true,
             deep: true
         }
+
     },
     methods: {
         pathchange(val) {
@@ -81,7 +82,6 @@ export default {
             }
         }
     }
-
 }
 </script>
 <style scoped lang="scss">

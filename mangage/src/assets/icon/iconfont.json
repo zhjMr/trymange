@@ -1,0 +1,37 @@
+{
+  "id": "3696362",
+  "name": "no name",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "6056154",
+      "name": "减",
+      "font_class": "jian1",
+      "unicode": "e66e",
+      "unicode_decimal": 58990
+    },
+    {
+      "icon_id": "6095691",
+      "name": "加",
+      "font_class": "jia1",
+      "unicode": "e6d5",
+      "unicode_decimal": 59093
+    },
+    {
+      "icon_id": "5315864",
+      "name": "加",
+      "font_class": "jia",
+      "unicode": "e62c",
+      "unicode_decimal": 58924
+    },
+    {
+      "icon_id": "6095690",
+      "name": "减",
+      "font_class": "jian",
+      "unicode": "e6d4",
+      "unicode_decimal": 59092
+    }
+  ]
+}

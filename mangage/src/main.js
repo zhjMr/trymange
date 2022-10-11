@@ -19,7 +19,8 @@ VueRouter.prototype.push = function push(location) {
 };
 
 import './drective/buttonPermission'
-
+//阿里图标
+import './assets/icon/iconfont.css'
 Vue.config.productionTip = false
 
 new Vue({

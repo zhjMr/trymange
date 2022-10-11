@@ -54,9 +54,16 @@ export default {
   transition: all 1s;
 }
 
+.el-footer {
+  color: #333;
+  text-align: center;
+  line-height: 60px;
+}
+
 .el-main {
   border-bottom: 1px solid #ccc;
-  background-color: #fff;
+  // background-color: #fff;
+  // background-color: pink;
   color: #333;
   padding: 0;
 }

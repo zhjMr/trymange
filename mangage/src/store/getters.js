@@ -4,8 +4,6 @@ export default {
     editableTabsValue: state => state.Tags.editableTabsValue,
     editableTabs: state => state.Tags.editableTabs,
     token: state => state.user.token,
-
-    // menuList:,
-        authList:state=>state.menu.authList,
-        routerList:state=>state.menu.routerList,
+    authList: state => state.menu.authList,
+    routerList: state => state.menu.routerList,
 }
